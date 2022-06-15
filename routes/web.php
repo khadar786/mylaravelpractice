@@ -16,3 +16,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/about',function(){
+    return "About";
+});
+
+Route::get('/contact',function(){
+    return "Contact";
+});
+
+Route::get('/post/{id}/{name}',function($id,$name){
+    return $id."|".$name;
+});
+
+Route::get('admin/posts/exampls',['as'=>'admin.home',function(){
+    $url=route('admin.home');
+    return $url;
+}]);
