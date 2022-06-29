@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
 });
 
@@ -32,4 +32,10 @@ Route::get('/post/{id}/{name}',function($id,$name){
 Route::get('admin/posts/exampls',['as'=>'admin.home',function(){
     $url=route('admin.home');
     return $url;
-}]);
+}]); */
+
+//Route::get('/post/{id}','PostsController@index');
+
+Route::resource('posts','PostsController');
+Route::get('/contact','PostsController@showMyPage');
+Route::get('/post/{id}','PostsController@showPost');
