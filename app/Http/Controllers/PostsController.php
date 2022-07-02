@@ -11,9 +11,9 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        return "Its working $id";
     }
 
     /**
@@ -34,7 +34,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +45,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        return "The number is :$id";
     }
 
     /**
@@ -80,5 +80,14 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showMyPage(){
+        $users=['surya','venu','khadar','lk prasad'];
+        return view('contact',compact('users'));
+    }
+
+    public function showPost($id){
+        return view('contact')->with(['id'=>$id]);
     }
 }
