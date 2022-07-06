@@ -23,10 +23,10 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('shoes', function (Blueprint $table) {
+        /* Schema::create('shoes', function (Blueprint $table) {
             $table->id();
             $table->string('brand');
-        });
+        }); */
     }
 
     /**

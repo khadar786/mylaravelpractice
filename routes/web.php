@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/insert',function(){
+    DB::insert('insert into posts(title,content,is_admin)values(?,?,?)',['PHP with Laravel','Laravel is the best thing that happen with php',1]);
+});
+
+Route::get('/read',function(){
+    $results=DB::select('SELECT * FROM posts WHERE id=?',[1]);
+    print_r($results);
+});
+
+Route::get('/update',function(){
+    DB::update('update posts set title="Update title" WHERE id=?',[1]);
+});
+
+Route::get('/delete',function(){
+    $deleted=DB::delete('delete from posts where id=?',[1]);
+    return $deleted;
+});
 /* Route::get('/', function () {
     return view('welcome');
 });
@@ -36,6 +53,6 @@ Route::get('admin/posts/exampls',['as'=>'admin.home',function(){
 
 //Route::get('/post/{id}','PostsController@index');
 
-Route::resource('posts','PostsController');
+/* Route::resource('posts','PostsController');
 Route::get('/contact','PostsController@showMyPage');
-Route::get('/post/{id}','PostsController@showPost');
+Route::get('/post/{id}','PostsController@showPost'); */
