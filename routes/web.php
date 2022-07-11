@@ -14,11 +14,11 @@ use App\Post;
 |
 */
 
- /*Route::get('/insert',function(){
-    DB::insert('insert into posts(title,content,is_admin)values(?,?,?)',['PHP with Laravel','Laravel is the best thing that happen with php2',1]);
-});
+/* Route::get('/insert',function(){
+    DB::insert('insert into posts(title,content,is_admin)values(?,?,?)',['PHP with Laravel 5','Laravel is the best thing that happen with php2',1]);
+}); */
 
-Route::get('/read',function(){
+ /*Route::get('/read',function(){
     $results=DB::select('SELECT * FROM posts WHERE id=?',[1]);
     print_r($results);
 });
@@ -58,10 +58,63 @@ Route::get('admin/posts/exampls',['as'=>'admin.home',function(){
 Route::get('/contact','PostsController@showMyPage');
 Route::get('/post/{id}','PostsController@showPost'); */
 
-Route::get('/find',function(){
+/* Route::get('/find',function(){
     $posts=Post::all();
 
     foreach($posts as $key=>$post){
         echo $post->title."<br>";
     }
+}); */
+
+Route::get('/findwhere',function(){
+    //$posts=Post::where('id',2)->get();
+    /* $posts=Post::orderBy('id','desc')->take(1)->get();
+    print_r($posts);
+
+    foreach($posts as $key=>$post){
+        echo ($key+1).$post->title."<br>";
+    } */
+    $post=Post::find(4);
+    echo $post->title;
+});
+
+Route::get('/savepost',function(){
+    $post=new Post;
+
+    $post->title='New post';
+    $post->content='This is new post';
+    $post->is_admin=1;
+
+    $post->save();
+});
+
+Route::get('/updatepost',function(){
+    $post=Post::find(7);
+
+    $post->title='New post 2';
+    $post->content='This is new post 2';
+    $post->is_admin=1;
+
+    $post->save();
+});
+
+Route::get('/creatpost',function(){
+    Post::create(['title'=>'new create post','content'=>'This is create method','is_admin'=>1]);
+});
+
+Route::get('/updatepost',function(){
+    //Post::where('id',2)->where('is_admin',1)->update(['title'=>'updating 2']);
+    Post::where(['id'=>2,'is_admin'=>1])->update(['title'=>'updating 3']);
+});
+
+Route::get('/deletepost',function(){
+    // $post=Post::find(2);
+    // $post->delete();
+
+    //Post::destroy(3);
+
+});
+
+Route::get('/softdelete',function(){
+    Post::find(3)->delete();
 });
