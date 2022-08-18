@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Post;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -117,4 +118,44 @@ Route::get('/deletepost',function(){
 
 Route::get('/softdelete',function(){
     Post::find(3)->delete();
+});
+
+Route::get('/readsoftdelete',function(){
+    //$post=Post::find(3);
+    //print_r($post);
+
+    /* $posts=Post::withTrashed()->get();
+    foreach($posts as $key=>$post){
+        echo $post->id;
+        echo "<br>";
+    } */
+    //print_r($posts);
+
+    //$post=Post::onlyTrashed()->get();
+    //print_r($post);
+    //echo $post[0]->id;
+});
+
+Route::get('/restore',function(){
+    Post::withTrashed()->where('is_admin',1)->restore();
+});
+
+Route::get('/forcedelete',function(){
+    //Post::onlyTrashed()->where('is_admin',1)->forceDelete();
+});
+
+//ELOQUENT Relationships
+Route::get('/user/{id}/post',function($id){
+    return User::find($id)->post;
+});
+
+Route::get('/post/{id}/user',function($id){
+    return Post::find($id)->user;
+});
+
+Route::get('/posts',function(){
+    $posts=User::find(1)->posts;
+    foreach($posts as $post){
+        echo $post->title."<br>";
+    }
 });
